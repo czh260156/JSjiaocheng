@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 10px auto;
+            text-align: center;
+        }
+        
+        button {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">这是原标题</h1>
+    <div id="box" data-name="yyds">这是一个div</div>
+
+    <ul id="list">
+        <li>apple</li>
+        <li>banana</li>
+        <li>orange</li>
+    </ul>
+
+    <button id="btnText">修改内容/button</button>
+    <button id="btnStyle">修改样式</button>
+    <button id="btnAttr">查看属性</button>
+    <button id="btnAdd">添加元素</button>
+    <button id="btnRemove">删除元素</button>
+
+    <script>
+        // 获取元素
+        const title = document.getElementById('title');
+        const box = document.getElementById('box');
+        const list = document.getElementById('list');
+        
+        // 2. 修改内容
+        document.getElementById('btnText').onclick = function() {
+            title.innerText = "这是修改后的标题";
+            box.innerHTML = "<strong>这是修改后的内内容</strong>";
+        }
+        
+        // 3. 修改样式
+        document.getElementById('btnStyle').onclick = function() {
+            box.style.backgroundColor = "red";
+            box.style.color = "#fff";
+            box.style.fontSize = "20px";
+        }
+        
+        // 4. 获取元素属性
+        document.getElementById('btnAttr').onclick = function() {
+            alert(box.getAttribute('data-name'));
+        }
+        
+        // 5. 创建并添加元素
+        document.getElementById('btnAdd').onclick = function() {
+            const li = document.createElement("li");
+            li.innerText = "yyds";
+            list.appendChild(li);
+        }
+        
+        // 6. 删除元素
+        document.getElementById('btnRemove').onclick = function() {
+            if (list.children.length > 0) {
+                list.removeChild(list.lastElementChild);
+            }
+        }
+    </script>
+</body>
+
+</html>
