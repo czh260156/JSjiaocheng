@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <p id="p1">1111111111111111</p>
+        <p id="p2">22222222222222</p>
+    </div>
+
+    <script>
+        const div1 = document.getElementById('div1');
+        const node1 = document.createElement('p');
+        const p1 = document.getElementById('p1');
+        const nodeText = document.createTextNode('3333333333');
+
+        node1.appendChild(nodeText);
+        div1.appendChild(node1);
+        div1.insertBefore(node1, p1);
+        div1.removeChild(p1);
+    </script>
+</body>
+</html>
