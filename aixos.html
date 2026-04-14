@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #result,
+        #postResult,
+        #asyncGetResult,
+        #asyncPostResult {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 300px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        hr {
+            margin: 30px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .method-title {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Axios GET Request Example</h1>
+    <button id="fetchButton">Fetch Users</button>
+    <div id="result"></div>
+
+    <!-- 新增 POST 请求示例 -->
+    <hr>
+    <h1>Axios POST Request Example</h1>
+    <div class="form-group">
+        <label for="titleInput">标题:</label>
+        <input type="text" id="titleInput" placeholder="输入标题">
+    </div>
+    <div class="form-group">
+        <label for="bodyInput">内容:</label>
+        <input type="text" id="bodyInput" placeholder="输入内容">
+    </div>
+    <button id="postButton">提交数据</button>
+    <div id="postResult"></div>
+
+    <!-- 新增 Async/Await GET 请求示例 -->
+    <hr>
+    <h1>Axios <span class="method-title">Async/Await</span> GET Request Example</h1>
+    <button id="asyncFetchButton">Async 获取用户</button>
+    <div id="asyncGetResult"></div>
+
+    <!-- 新增 Async/Await POST 请求示例 -->
+    <hr>
+    <h1>Axios <span class="method-title">Async/Await</span> POST Request Example</h1>
+    <div class="form-group">
+        <label for="asyncTitleInput">标题:</label>
+        <input type="text" id="asyncTitleInput" placeholder="输入标题">
+    </div>
+    <div class="form-group">
+        <label for="asyncBodyInput">内容:</label>
+        <input type="text" id="asyncBodyInput" placeholder="输入内容">
+    </div>
+    <button id="asyncPostButton">Async 提交数据</button>
+    <div id="asyncPostResult"></div>
+
+</body>
+
+</html>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    // 防抖函数的定义：一定时间内，多次执行，只执行最后一次
+    /*
+    防抖函数：控制函数执行频率的一种方式
+    原理：当持续触发事件时，函数不会立刻执行，而是等到停止触发后延迟一段时间再执行
+    用途：适用与搜索框，窗口大小调整或疯狂点击的场景等场景，避免频繁触发事件，导致性能问题
+    */
+    function debounce(func, delay) {
+        let timer;  // 定义一个计时器变量，用于存储setTimeout的返回值
+        // 返回一个新函数，这个函数会在合适的时候调用原始函数func
+        return function () {
+            clearTimeout(timer); // 每次触发时，清楚之前的定时器，取消之前等待执行的函数
+            // 重新设置一个定时器，delay毫秒后执行func函数
+            timer = setTimeout(() => {
+                // apply用于保持this上下文并传递所有参数
+                func.apply(this, arguments);
+                // 这里的this指向调用这个返回函数的对象，// arguments是调用时传入的所有参数
+            }, delay);
+        }
+    }
+
+    // 节流函数定义：一定时间内，只执行一次
+    /*
+    节流函数：控制函数执行频率的另一种方式
+    原理：无论事件触发多频繁，函数在此指定时间内只执行一次
+    用途：适用与滚动条，鼠标移动，页面缩放等高触发发常见
+    用途：适用与滚动条，鼠标移动，页面缩放等场景，避免频繁触发事件，导致性能问题
+    */
+    function throttle(func, delay) {
+        let lastTime = 0; // 记录上一次函数执行的时间戳
+        // 返回一个新函数，这个函数会在合适的时候调用原始函数func
+        return function () {
+            const now = new Date().getTime(); // 获取当前时间戳
+            // 判断当前时间与上传执行时间的差值是否大于等于指定的延迟时间
+            if (now - lastTime > delay) {
+                // 如果满足条件，则执行原始函数func并保持this上下文并传递所有参数
+                func.apply(this, arguments);
+                lastTime = now; // 更新上传执行的时间戳为当前时间
+            }
+            // 否则，什么也不做，即节流
+        }
+    }
+</script>
+
+</body>
+</html>
