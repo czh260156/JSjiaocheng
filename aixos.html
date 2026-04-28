@@ -112,50 +112,47 @@
 </html>
 <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 <script>
-    // 防抖函数的定义：一定时间内，多次执行，只执行最后一次
-    /*
-    防抖函数：控制函数执行频率的一种方式
-    原理：当持续触发事件时，函数不会立刻执行，而是等到停止触发后延迟一段时间再执行
-    用途：适用与搜索框，窗口大小调整或疯狂点击的场景等场景，避免频繁触发事件，导致性能问题
-    */
-    function debounce(func, delay) {
-        let timer;  // 定义一个计时器变量，用于存储setTimeout的返回值
-        // 返回一个新函数，这个函数会在合适的时候调用原始函数func
-        return function () {
-            clearTimeout(timer); // 每次触发时，清楚之前的定时器，取消之前等待执行的函数
-            // 重新设置一个定时器，delay毫秒后执行func函数
-            timer = setTimeout(() => {
-                // apply用于保持this上下文并传递所有参数
-                func.apply(this, arguments);
-                // 这里的this指向调用这个返回函数的对象，// arguments是调用时传入的所有参数
-            }, delay);
-        }
-    }
+    // 防抖函数定义: 一定时间内，多次执行，只执行最后一次
+/*
+ * 防抖函数：控制函数执行频率的一种方式
+ * 原理：当持续触发事件时，函数不会立即执行，而是等到停止触发后延迟一段时间再执行
+ * 用途：适用于搜索框输入、窗口大小调整等场景，避免频繁触发导致性能问题
+ */
+function debounce(func, delay) {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}
 
-    // 节流函数定义：一定时间内，只执行一次
-    /*
-    节流函数：控制函数执行频率的另一种方式
-    原理：无论事件触发多频繁，函数在此指定时间内只执行一次
-    用途：适用与滚动条，鼠标移动，页面缩放等高触发发常见
-    用途：适用与滚动条，鼠标移动，页面缩放等场景，避免频繁触发事件，导致性能问题
-    */
-    function throttle(func, delay) {
-        let lastTime = 0; // 记录上一次函数执行的时间戳
-        // 返回一个新函数，这个函数会在合适的时候调用原始函数func
-        return function () {
-            const now = new Date().getTime(); // 获取当前时间戳
-            // 判断当前时间与上传执行时间的差值是否大于等于指定的延迟时间
-            if (now - lastTime > delay) {
-                // 如果满足条件，则执行原始函数func并保持this上下文并传递所有参数
-                func.apply(this, arguments);
-                lastTime = now; // 更新上传执行的时间戳为当前时间
-            }
-            // 否则，什么也不做，即节流
-        }
-    }
-</script>
+// 节流函数定义: 一定时间内，只执行一次, xi'yixing
+/*
+ * 节流函数：控制函数执行频率的另一种方式
+ * 原理：无论事件触发多频繁，函数在指定时间内只执行一次
+ * 用途：适用于滚动事件、鼠标移动、页面缩放等高频触发场景
+ */
+function throttle(func, delay) {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}
+
+// get请求
+// 当用户可能快速多次点击按钮的时候，我们只希望处理最后一次点击，所以我们用防抖函数
+document.getElementById("fetchButton").addEventListener('click', debounce(function () {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}));
+
+// post请求
+// 即使用户疯狂点击提交按钮，我们也给他进行限制，也是最多让他5秒内只处理一次，所以我们用节流函数
+document.getElementById("postButton").addEventListener('click', throttle(function () {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}));
+
+document.getElementById("asyncFetchButton").addEventListener('click', debounce(async function () {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}));
+
+document.getElementById("asyncPostButton").addEventListener('click', throttle(async function () {
+    // ...（函数内部实现被省略，未在图中完整显示）
+}));
+  </script>
 
 </body>
 </html>
