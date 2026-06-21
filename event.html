@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+        .box {
+            width: 260px;
+            padding: 16px 0;
+            margin: 16px 0;
+            border: 1px solid aquamarine;
+            background-color: blueviolet;
+        }
+        button, input {
+            margin: 8px 0;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>事件基础</h1>
+    <button id="btn">点击我</button>
+    <div id="clickBox" class="box">这里显示点击结果</div>
+
+    <input type="text" id="text" placeholder="输入内容">
+    <div id="inputBox" class="box">这里显示输入内容</div>
+
+    <div id="hoverBox" class="box">把鼠标移入这里</div>
+
+    <script>
+        // 1. click 事件
+        const btn = document.getElementById('btn');
+        const clickBox = document.getElementById('clickBox');
+        btn.onclick = function () {
+            clickBox.innerText = '按钮被点击了';
+        }
+
+        // 2. input 事件
+        const text = document.getElementById('text');
+        const inputBox = document.getElementById('inputBox');
+        text.oninput = function () {
+            inputBox.innerText = '你输入了：' + text.value;
+        }
+
+        // 3. mouseover / mouseout 事件
+        const hoverBox = document.getElementById('hoverBox');
+        hoverBox.onmouseover = function () {
+            hoverBox.innerText = '鼠标移入';
+            hoverBox.style.backgroundColor = 'red';
+        }
+        hoverBox.onmouseout = function () {
+            hoverBox.innerText = '鼠标移出';
+            hoverBox.style.backgroundColor = 'green';
+        }
+    </script>
+</body>
+</html>
